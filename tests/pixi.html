@@ -16,6 +16,7 @@
     </div>
 
     <script src="../node_modules/pixi.js/dist/pixi.js"></script>
+    <script src="https://pixijs.io/examples/required/plugins/pixi-spine.js"></script>
     <script>
         var viewWidth = 480;
         var viewHeight = 360;
@@ -25,8 +26,34 @@
             view: document.getElementById('example')
         });
 
+        PIXI.loader
+            .add('goblins', 'assets/goblins.json')
+            .load(onAssetsLoaded);
+
         // create an new instance of a pixi stage
         var stage = new PIXI.Container();
+
+
+        function onAssetsLoaded(loader, res)
+        {
+            var goblin = new PIXI.spine.Spine(res.goblins.spineData);
+            console.log(goblin);
+
+            // set current skin
+            goblin.skeleton.setSkinByName('goblin');
+            goblin.skeleton.setSlotsToSetupPose();
+
+            // set the position
+            goblin.x = 400;
+            goblin.y = 600;
+
+            goblin.scale.set(1.5);
+
+            // play animation
+            goblin.state.setAnimation(0, 'walk', true);
+
+            stage.addChild(goblin);
+        }
 
         stage._inspector = {
             type: 'stage',
