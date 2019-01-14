@@ -197,8 +197,21 @@ export default class InspectorOutliner {
       node[outliner].parent = null;
     }
 
+    if (node[outliner].type === "PIXI.spine.Spine") {
+      if (typeof node[outliner].isSpine === "undefined") {
+        node[outliner].isSpine = true;
+      }
+
+      if (typeof node[outliner].notShow === "undefined") {
+        node[outliner].notShow = true;
+      }
+    }
+
     if (Array.isArray(node.children)) {
-      if (node.children.length === 0) {
+      if (
+        node.children.length === 0 ||
+        (node[outliner].isSpine && node[outliner].notShow)
+      ) {
         node[outliner].children = false;
       } else if (
         node[outliner].collapsed === false ||
@@ -213,6 +226,7 @@ export default class InspectorOutliner {
     } else {
       node[outliner].children = false;
     }
+    
     return node[outliner];
   }
 }
