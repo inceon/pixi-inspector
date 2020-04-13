@@ -221,9 +221,15 @@ export default class InspectorGui {
       resolution: window.devicePixelRatio,
       view: canvas
     };
-    if (overlay.PIXI.WebGLRenderer.length === 1) {
+    let overlayRendererType;
+    if (typeof overlay.PIXI.Renderer !== "undefined") {
+      overlayRendererType = overlay.PIXI.Renderer;
+    } else {
+      overlayRendererType = overlay.PIXI.WebGLRenderer;
+    }
+    if (overlayRendererType.length === 1) {
       // Expects a Phaser Game object?
-      overlay.renderer = new overlay.PIXI.WebGLRenderer(
+      overlay.renderer = new overlayRendererType(
         Object.assign(
           {
             canvas,
@@ -237,7 +243,7 @@ export default class InspectorGui {
         )
       );
     } else {
-      overlay.renderer = new overlay.PIXI.WebGLRenderer(
+      overlay.renderer = new overlayRendererType(
         window.innerWidth,
         window.innerHeight,
         options
