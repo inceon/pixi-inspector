@@ -2,7 +2,29 @@ export const blacklist = [
   "children",
   "parent",
   "tempDisplayObjectParent",
-  "scope"
+  "scope",
+  "state",
+  "skeleton",
+  "stateData",
+  "spineData",
+  "slotContainers",
+  "tempClipContainers",
+  "lastTime",
+  "filterArea",
+  "accessible",
+  "accessibleHint",
+  "accessibleTitle",
+  "delayLimit",
+  "cachedTint",
+  "pluginName",
+  "shader",
+  "trackedPointers",
+  "vertexData",
+  "vertexTrimmedData",
+  "localTransform",
+  "worldTransform",
+  "tint",
+  "tintRgb"
 ];
 export const whitelist = [
   "transform",
@@ -85,6 +107,27 @@ export default class InspectorProperties {
           properties.push(
             ...this.serialize(value[property], [...path, property], depth)
           );
+        }
+        if (value instanceof this.ObservablePointRef) {
+          properties.push(
+            {
+              path: path.join(".").replace("transform.", "") + ".x",
+              type: "number",
+              value: value.x
+            },
+            {
+              path: path.join(".").replace("transform.", "") + ".y",
+              type: "number",
+              value: value.y
+            }
+          );
+        }
+        if (value instanceof this.TransformRef) {
+          properties.push({
+            path: path.join(".") + ".rotation",
+            type: "number",
+            value: value.rotation
+          });
         }
         if (properties.length !== 0) {
           return properties;
