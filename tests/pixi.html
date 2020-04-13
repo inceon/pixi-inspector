@@ -15,8 +15,9 @@
         <!-- this is where the PixiPanel will get rendered -->
     </div>
 
-    <script src="../node_modules/pixi.js/dist/pixi.js"></script>
-    <script src="https://pixijs.io/examples/required/plugins/pixi-spine.js"></script>
+    <script src="https://d157l7jdn8e5sf.cloudfront.net/v4.x/pixi.js"></script>
+    <script src="https://pixijs.io/examples-v4/pixi-plugins/pixi-legacy.js"></script>
+    <script src="https://pixijs.io/examples-v4/pixi-plugins/pixi-spine.js"></script>
     <script>
         var viewWidth = 480;
         var viewHeight = 360;
@@ -61,7 +62,7 @@
         };
 
         // create a background texture
-        var pondFloorTexture = PIXI.Texture.fromImage("assets/BGrotate.jpg");
+        var pondFloorTexture = PIXI.Texture.from("assets/BGrotate.jpg");
         // create a new background sprite
         var pondFloorSprite = new PIXI.Sprite(pondFloorTexture);
         stage.addChild(pondFloorSprite);
@@ -77,7 +78,7 @@
         for (var i = 0; i < totalDude; i++) {
 
             // create a new Sprite that uses the image name that we just generated as its source
-            var dude = PIXI.Sprite.fromImage("assets/eggHead.png");
+            var dude = PIXI.Sprite.from("assets/eggHead.png");
             dude.name = 'name_' + i;
             dude.interactive = true;
             dude.cursor = 'help';

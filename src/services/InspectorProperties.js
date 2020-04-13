@@ -86,27 +86,6 @@ export default class InspectorProperties {
             ...this.serialize(value[property], [...path, property], depth)
           );
         }
-        if (value instanceof this.ObservablePointRef) {
-          properties.push(
-            {
-              path: path.join(".") + ".x",
-              type: "number",
-              value: value.x
-            },
-            {
-              path: path.join(".") + ".y",
-              type: "number",
-              value: value.y
-            }
-          );
-        }
-        if (value instanceof this.TransformRef) {
-          properties.push({
-            path: path.join(".") + ".rotation",
-            type: "number",
-            value: value.rotation
-          });
-        }
         if (properties.length !== 0) {
           return properties;
         }

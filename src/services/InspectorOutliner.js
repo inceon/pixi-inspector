@@ -226,7 +226,6 @@ export default class InspectorOutliner {
     } else {
       node[outliner].children = false;
     }
-    
     return node[outliner];
   }
 }
