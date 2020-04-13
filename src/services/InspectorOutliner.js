@@ -183,10 +183,7 @@ export default class InspectorOutliner {
         id: -1,
         name: node.name,
         type: this.inspector.typeDetection.detectType(node),
-        collapsed:
-          node.parent && node.parent[outliner]
-            ? node.parent[outliner].parent !== null
-            : false,
+        collapsed: true,
         children: null
       };
       node[outliner].id = this.nodes.push(node) - 1;
@@ -215,7 +212,7 @@ export default class InspectorOutliner {
         node[outliner].children = false;
       } else if (
         node[outliner].collapsed === false ||
-        !node[outliner].parent.found
+        (node[outliner].parent && !node[outliner].parent.found)
       ) {
         node[outliner].children = node.children.map(childNode =>
           this.serialize(childNode)

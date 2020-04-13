@@ -68,14 +68,15 @@
         stage.addChild(pondFloorSprite);
 
 
-        var dudesContainer = new PIXI.Container();
-        stage.addChild(dudesContainer);
-        // create an array to store a refference to the fish in the pond
         var dudeArray = [];
+        for(let j = 0;j<6;j++) {
+          var dudesContainer = new PIXI.Container();
+          stage.addChild(dudesContainer);
+          // create an array to store a refference to the fish in the pond
 
-        var totalDude = 10;
+          var totalDude = 10;
 
-        for (var i = 0; i < totalDude; i++) {
+          for (var i = 0; i < totalDude; i++) {
 
             // create a new Sprite that uses the image name that we just generated as its source
             var dude = PIXI.Sprite.from("assets/eggHead.png");
@@ -111,6 +112,8 @@
 
             // finally we push the dude into the dudeArray so it it can be easily accessed later
             dudeArray.push(dude);
+
+          }
 
         }
 
