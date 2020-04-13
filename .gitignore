@@ -117,3 +117,4 @@ fabric.properties
 .DS_Store
 /src/.cache-loader/
 /build/
+/yarn.lock
