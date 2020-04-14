@@ -2,6 +2,7 @@ import { Subject, defer, concat, merge as mergeObservables } from "rxjs";
 import { tap, merge, publishReplay, refCount, map } from "rxjs/operators";
 import asyncEval from "../devtools-rx/asyncEval";
 import connection from "./connection";
+import recursiveDeepCopy from "../utils";
 
 /**
  * Async access to the Inspector.
@@ -100,7 +101,7 @@ export default class AsyncInspector {
         value = helper[_method](...args);
       }
       if (typeof value !== "undefined") {
-        value = JSON.parse(JSON.stringify(value));
+        value = recursiveDeepCopy(value);
       }
       return Promise.resolve(value);
     }

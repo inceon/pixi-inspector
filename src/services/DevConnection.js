@@ -2,6 +2,7 @@
 /* eslint-disable no-console, class-methods-use-this */
 import { Subject, of, never } from "rxjs";
 import Inspector from "./Inspector";
+import recursiveDeepCopy from "../utils";
 
 const commands = {
   TREE: new Subject(),
@@ -14,9 +15,7 @@ if (!window.PIXI) {
 }
 function emit(command, data) {
   if (commands[command]) {
-    return commands[command].next(
-      JSON.parse(JSON.stringify({ command, data }))
-    );
+    return commands[command].next(recursiveDeepCopy({ command, data }));
   }
   console.warn("Unsupported emit", command);
 }
